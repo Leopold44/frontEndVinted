@@ -1,0 +1,78 @@
+/* -----Image----- */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home > section:first-child {
+  margin-bottom: 50px;
+  width: 100%;
+  position: relative;
+}
+.home > section:first-child > img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.home > section:first-child > div {
+  height: 270px;
+  width: 410px;
+  position: absolute;
+  bottom: 70px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 0 30px;
+  margin-left: 135px;
+}
+.home > section:first-child button {
+  height: 45px;
+  width: 190px;
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #2db0ba;
+}
+.home > section:first-child p {
+  font-size: 34px;
+}
+/* -----Liste des offres----- */
+.home > section:last-child {
+  width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px 50px;
+  margin-bottom: 30px;
+}
+.article {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+}
+.article > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.article > div:first-child > img {
+  height: 40px;
+  border-radius: 50%;
+}
+.article > img {
+  height: 250px;
+  width: 200px;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 10px;
+}
+.article > p {
+  margin-bottom: 1.5px;
+}
