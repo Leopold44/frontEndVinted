@@ -7,18 +7,20 @@ import SignUp from "./assets/components/Sign/SignUp";
 import SignIn from "./assets/components/Sign/SignIn";
 import Publish from "./assets/components/Publish/Publish";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState("");
+  const [token, setToken] = useState(Cookies.get("token") || null);
   const [signUpVisible, setSignUpVisible] = useState(false);
   const [signInVisible, setSignInVisible] = useState(false);
   const [search, setIsSearch] = useState("");
+
   return (
     <div className="app">
       <Router>
         <Header
-          isAuthenticated={isAuthenticated}
-          setIsAuthenticated={setIsAuthenticated}
+          token={token}
+          setToken={setToken}
           setSignUpVisible={setSignUpVisible}
           setSignInVisible={setSignInVisible}
           search={search}
@@ -30,16 +32,10 @@ function App() {
           <Route path="/publish" element={<Publish />} />
         </Routes>
         {signUpVisible && (
-          <SignUp
-            setSignUpVisible={setSignUpVisible}
-            setIsAuthenticated={setIsAuthenticated}
-          />
+          <SignUp setSignUpVisible={setSignUpVisible} setToken={setToken} />
         )}
         {signInVisible && (
-          <SignIn
-            setSignInVisible={setSignInVisible}
-            setIsAuthenticated={setIsAuthenticated}
-          />
+          <SignIn setSignInVisible={setSignInVisible} setToken={setToken} />
         )}
       </Router>
     </div>

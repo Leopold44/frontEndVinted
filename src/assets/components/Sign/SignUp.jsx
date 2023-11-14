@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCross } from "@fortawesome/free-solid-svg-icons";
 
-const SignUp = ({ setIsAuthenticated, setSignUpVisible }) => {
+const SignUp = ({ setToken, setSignUpVisible }) => {
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -33,7 +33,7 @@ const SignUp = ({ setIsAuthenticated, setSignUpVisible }) => {
         user
       );
       Cookies.set("token", `${response.data.token}`);
-      setIsAuthenticated(response.data.token);
+      setToken(response.data.token);
       setSignUpVisible(false);
     } catch (error) {
       setErrorMessage(error.response.data.message);

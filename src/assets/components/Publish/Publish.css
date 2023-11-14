@@ -51,3 +51,38 @@
   border-style: none;
   border-radius: 5px;
 }
+.addOffer img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+.addOffer .divImage {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+.addOffer .cross {
+  position: absolute;
+  top: 10px;
+  left: 270px;
+}
+.addOffer > .image {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.addOffer .image input {
+  display: none;
+}
+.addOffer .image label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  border-radius: 5px;
+  border: #09b0ba solid 2px;
+  color: #09b0ba;
+  font-size: 20px;
+  padding-left: 20px;
+}

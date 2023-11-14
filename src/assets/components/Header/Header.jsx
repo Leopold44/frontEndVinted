@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 <FontAwesomeIcon icon={faMagnifyingGlass} />;
 
 const Header = ({
-  isAuthenticated,
-  setIsAuthenticated,
+  token,
+  setToken,
   setSignUpVisible,
   setSignInVisible,
   search,
@@ -18,7 +18,7 @@ const Header = ({
   const navigate = useNavigate();
   const disconnect = () => {
     Cookies.remove("token");
-    setIsAuthenticated(false);
+    setToken(null);
     navigate("/");
   };
   return (
@@ -41,7 +41,7 @@ const Header = ({
           <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
         </div>
         <div>
-          {isAuthenticated ? (
+          {token ? (
             <button onClick={disconnect}>Se déconnecter</button>
           ) : (
             <>
@@ -65,7 +65,7 @@ const Header = ({
           )}
           <button
             onClick={() => {
-              isAuthenticated ? navigate("/publish") : setSignInVisible(true);
+              token ? navigate("/publish") : setSignInVisible(true);
             }}
           >
             Vends tes articles

@@ -2,8 +2,12 @@ import { useState } from "react";
 import "./Publish.css";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCross } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Publish = () => {
+  const navigate = useNavigate();
   const [offer, setOffer] = useState({
     file: "",
     title: "",
@@ -26,7 +30,7 @@ const Publish = () => {
   formData.append("city", offer.city);
   formData.append("price", offer.price);
   const token = Cookies.get("token");
-  const [cloudinaryPicture, setCloudinaryPicture] = useState("");
+  const [picture, setPicture] = useState("");
   const [error, setError] = useState("");
   const addOffer = async (event) => {
     try {
@@ -41,7 +45,7 @@ const Publish = () => {
           },
         }
       );
-      setCloudinaryPicture(response.data.newOffer.product_image.secure_url);
+      navigate("/");
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -50,19 +54,41 @@ const Publish = () => {
     <form className="addOffer" onSubmit={addOffer}>
       <h1>Vends tes articles</h1>
       {error && <p>{error}</p>}
-      <div>
-        <label htmlFor="picture">Décris ton article</label>
-        <input
-          type="file"
-          id="picture"
-          onChange={(event) => {
-            setOffer((offer) => ({
-              ...offer,
-              picture: event.target.files[0],
-            }));
-          }}
-        />
-        {cloudinaryPicture && <img src={cloudinaryPicture} alt="photo" />}
+      <div className="image">
+        {picture ? (
+          <div className="divImage">
+            <img src={picture} alt="photo" />
+            <FontAwesomeIcon
+              icon={faCross}
+              className="cross"
+              onClick={() => {
+                setPicture(null);
+                setOffer((offer) => ({
+                  ...offer,
+                  picture: null,
+                }));
+              }}
+            />
+          </div>
+        ) : (
+          <div>
+            <label htmlFor="picture">Décris ton article</label>
+            <input
+              type="file"
+              id="picture"
+              placeholder="Ajouter une photo"
+              value={offer.file}
+              onChange={(event) => {
+                setOffer((offer) => ({
+                  ...offer,
+                  picture: event.target.files[0],
+                }));
+                setPicture(URL.createObjectURL(event.target.files[0]));
+              }}
+            />
+            <FontAwesomeIcon icon={faCross} className="cross" />
+          </div>
+        )}
       </div>
       <div>
         <div>
@@ -70,6 +96,7 @@ const Publish = () => {
           <input
             type="text"
             id="title"
+            value={offer.title}
             placeholder="ex: Chemise Sézanne verte"
             onChange={(event) => {
               setOffer((offer) => ({ ...offer, title: event.target.value }));
@@ -81,6 +108,7 @@ const Publish = () => {
           <input
             type="text"
             id="description"
+            value={offer.description}
             placeholder="ex: porté quelquefois, taille correctement"
             onChange={(event) => {
               setOffer((offer) => ({
@@ -97,6 +125,7 @@ const Publish = () => {
           <input
             type="text"
             id="brand"
+            value={offer.brand}
             placeholder="ex: Zara"
             onChange={(event) => {
               setOffer((offer) => ({ ...offer, brand: event.target.value }));
@@ -108,6 +137,7 @@ const Publish = () => {
           <input
             type="text"
             id="size"
+            value={offer.size}
             placeholder="ex: L / 40 / 12"
             onChange={(event) => {
               setOffer((offer) => ({ ...offer, size: event.target.value }));
@@ -119,6 +149,7 @@ const Publish = () => {
           <input
             type="text"
             id="color"
+            value={offer.color}
             placeholder="ex: Fushia"
             onChange={(event) => {
               setOffer((offer) => ({ ...offer, color: event.target.value }));
@@ -130,6 +161,7 @@ const Publish = () => {
           <input
             type="text"
             id="condition"
+            value={offer.condition}
             placeholder="ex: Neuf avec étiquette"
             onChange={(event) => {
               setOffer((offer) => ({
@@ -144,6 +176,7 @@ const Publish = () => {
           <input
             type="text"
             id="city"
+            value={offer.city}
             placeholder="ex: Paris"
             onChange={(event) => {
               setOffer((offer) => ({ ...offer, city: event.target.value }));
@@ -156,6 +189,7 @@ const Publish = () => {
         <input
           type="text"
           id="price"
+          value={offer.price}
           placeholder="ex: 0.00 €"
           onChange={(event) => {
             setOffer((offer) => ({ ...offer, price: event.target.value }));
