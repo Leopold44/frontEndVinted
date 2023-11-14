@@ -2,13 +2,12 @@ import "./Sign.css";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCross } from "@fortawesome/free-solid-svg-icons";
 
 const SignIn = ({ setIsAuthenticated, setSignInVisible }) => {
   const [user, setUser] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(false);
   const userSignIn = (elem, key) => {
     const newObject = { ...user };
     newObject[key] = elem.target.value;
@@ -25,7 +24,7 @@ const SignIn = ({ setIsAuthenticated, setSignInVisible }) => {
       setIsAuthenticated(true);
       setSignInVisible(false);
     } catch (error) {
-      error.message;
+      setErrorMessage(true);
     }
   };
   return (
@@ -54,6 +53,9 @@ const SignIn = ({ setIsAuthenticated, setSignInVisible }) => {
           }}
         >
           <h1>Se connecter</h1>
+          {errorMessage && (
+            <p className="error">Identifiant ou mot de passe incorrect</p>
+          )}
           <input
             type="email"
             name="userMail"
@@ -74,7 +76,6 @@ const SignIn = ({ setIsAuthenticated, setSignInVisible }) => {
               userSignIn(elem, "password");
             }}
           />
-
           <button type="submit">Se connecter</button>
         </form>
       </div>

@@ -1,0 +1,53 @@
+.addOffer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #eaedee;
+  padding: 20px 93px;
+}
+.addOffer > h1 {
+  font-size: 23px;
+  font-weight: bold;
+}
+.addOffer > p {
+  color: red;
+}
+.addOffer > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  border: grey solid 1px;
+  border-radius: 5px;
+  padding: 20px 30px;
+}
+.addOffer > div > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  border-bottom: grey solid 1px;
+}
+.addOffer input {
+  width: 300px;
+  height: 40px;
+  border-style: none;
+  border-bottom: 1px grey solid;
+  font-size: 17px;
+}
+.addOffer label {
+  width: 300px;
+  height: 40px;
+  border-style: none;
+  font-size: 17px;
+}
+.addOffer button {
+  background-color: #09b0ba;
+  color: white;
+  align-self: flex-end;
+  width: 80px;
+  height: 40px;
+  border-style: none;
+  border-radius: 5px;
+}

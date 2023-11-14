@@ -69,3 +69,6 @@ button:hover {
 .cross:hover {
   cursor: pointer;
 }
+.signup .error {
+  color: red;
+}

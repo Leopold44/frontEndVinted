@@ -12,6 +12,8 @@ const Header = ({
   setIsAuthenticated,
   setSignUpVisible,
   setSignInVisible,
+  search,
+  setIsSearch,
 }) => {
   const navigate = useNavigate();
   const disconnect = () => {
@@ -30,7 +32,11 @@ const Header = ({
           <input
             type="text"
             name="search"
+            value={search}
             placeholder="Rechercher des articles"
+            onChange={(elem) => {
+              setIsSearch(elem.target.value);
+            }}
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
         </div>
@@ -57,7 +63,13 @@ const Header = ({
               </button>
             </>
           )}
-          <button>Vends tes articles</button>
+          <button
+            onClick={() => {
+              isAuthenticated ? navigate("/publish") : setSignInVisible(true);
+            }}
+          >
+            Vends tes articles
+          </button>
         </div>
       </div>
     </header>

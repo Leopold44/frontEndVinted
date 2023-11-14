@@ -2,18 +2,17 @@ import "./Sign.css";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCross } from "@fortawesome/free-solid-svg-icons";
 
 const SignUp = ({ setIsAuthenticated, setSignUpVisible }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
     newsletter: false,
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const userUpdate = (elem, key) => {
     const objectNew = { ...user };
     if (!key) {
@@ -37,7 +36,7 @@ const SignUp = ({ setIsAuthenticated, setSignUpVisible }) => {
       setIsAuthenticated(response.data.token);
       setSignUpVisible(false);
     } catch (error) {
-      error.message;
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -67,6 +66,7 @@ const SignUp = ({ setIsAuthenticated, setSignUpVisible }) => {
           }}
         >
           <h1>S'inscrire</h1>
+          {errorMessage && <p className="error">{errorMessage}</p>}
           <input
             type="text"
             name="userName"

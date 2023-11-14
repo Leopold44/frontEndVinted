@@ -4,13 +4,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import imageHome from "../../../Images/imageHome.webp";
 
-const Home = () => {
+const Home = ({ search }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fletchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/offers");
+        const response = await axios.get(
+          `http://localhost:3000/offers?title=${search}`
+        );
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -18,7 +20,7 @@ const Home = () => {
       }
     };
     fletchData();
-  }, []);
+  }, [search]);
   return isLoading ? (
     <p>Chargement en cours</p>
   ) : (

@@ -12,6 +12,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState("");
   const [signUpVisible, setSignUpVisible] = useState(false);
   const [signInVisible, setSignInVisible] = useState(false);
+  const [search, setIsSearch] = useState("");
   return (
     <div className="app">
       <Router>
@@ -20,9 +21,11 @@ function App() {
           setIsAuthenticated={setIsAuthenticated}
           setSignUpVisible={setSignUpVisible}
           setSignInVisible={setSignInVisible}
+          search={search}
+          setIsSearch={setIsSearch}
         />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home search={search} />} />
           <Route path="/offer/:id" element={<Offer />} />
           <Route path="/publish" element={<Publish />} />
         </Routes>
